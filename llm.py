@@ -17,6 +17,18 @@ def load_llama():
     return llm
 
 def load_gemini():
+    from langchain_google_genai import ChatGoogleGenerativeAI
+    from secret_key import gemini_api_key as google_api_key
+    
+    llm = ChatGoogleGenerativeAI(
+        model = "gemini-1.0-pro",
+        google_api_key = google_api_key
+    )
+    
+    return llm
+
+# is not loaded as langchain_community.llms.ctransformer.CTransformer, and so is not compatible with chains
+def _load_gemini():
     import google.generativeai as genai
     from secret_key import gemini_api_key as api_key
     import os
