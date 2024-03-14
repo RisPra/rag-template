@@ -4,7 +4,7 @@ from langchain.chains.sequential import SequentialChain
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 
-llm = load_gemini()
+llm = load_llama()
 
 country_prompt = PromptTemplate(
     input_variables = ["letter"],
