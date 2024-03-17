@@ -1,5 +1,5 @@
-from llm import load_gemini
-from llm import load_llama
+from llm_loader import load_gemini
+from llm_loader import load_llama
 from langchain.chains.sequential import SequentialChain
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
