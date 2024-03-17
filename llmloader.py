@@ -28,7 +28,7 @@ import os
 def load_gemini():
     '''
         Usage:
-            
+            llm.generate_content("Content")
     '''
     from langchain_google_genai import ChatGoogleGenerativeAI
     from secret_key import gemini_api_key as google_api_key
@@ -52,14 +52,23 @@ def load_llama() -> CTransformers:
 
     prompt = "Llamas are a creature native to the country of "
 
-    tokenised_sentence = tokeniser(
-        prompt,
-        return_tensors = "pt",
-    )
+    tokenised_words = tokeniser(
+        prompt = prompt,
+        return_tensors = "pt"
+    ).input_ids.cuda()
 
-    # input_ids = tokenizer(prompt_template, return_tensors='pt').input_ids.cuda()
-    # output = model.generate(inputs=input_ids, temperature=0.7, do_sample=True, top_p=0.95, top_k=40, max_new_tokens=512)
-    # print(tokenizer.decode(output[0]))
+    output = model.generate(
+        inputs = tokenised_words,
+        temperature = 0.7,
+        do_sample = True,
+        top_p = 0.95,
+        top_k=40,
+        max_new_tokens=512
+    )
+    
+    result = tokeniser.decode(output[0])
+    
+    print(result)
 
 @DeprecationWarning
 def _load_llama():
